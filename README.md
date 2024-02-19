@@ -1,1 +1,1 @@
-# Intro-to-Reinforcement-Learning
+# Intro to Reinforcement Learning
