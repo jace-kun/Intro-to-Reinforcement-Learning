@@ -144,4 +144,129 @@
 
                 -  The process of solving this optimization problem is called Policy Search. We want to find the best policy to drive actions and maximize cumulative rewards.
              
-## Watch videos 1-4 in this playlist: 
+# Overview of Reinforcement Learning Methods: Model Based and Model Free Algorithms
+
+-  https://youtube.com/playlist?list=PLh4QNkwqMcmajgr01eLZIptATKKvOLqAZ&si=_pevc4Vj_d_7MzjB
+
+## Model Based Reinforcement Learning
+
+### Value Function
+-  $V_{\pi}(s) = \mathbb{E}(\sum_{k}\gamma^{k}r_{k}|s_{0}=s)$
+
+-  $V(s) = max_{\pi} \mathbb{E}(\sum_{k=0}^{\infty}\gamma^{k}r_{k}|s_{0}=s)$
+
+-  $V(s) = max_{\pi} \mathbb{E}(r_{0}+\sum_{k=1}^{\infty}\gamma^{k}r_{k}|s_{1}=s')$
+
+-  $V(s) = max_{\pi} \mathbb{E}(r_{0}+\gamma V(s'))$ <--- Bellman's Equation
+
+- $\pi = argmax_{\pi} \mathbb{E}(r_{0} + \gamma V(s'))$
+
+### Value Iteration
+-  $V(s) = max_{a}\sum_{s'}P(s'|s,a)(R(s',s,a)+\gamma V(s'))$
+
+-  $\pi(s,a) = argmax_{a}\sum_{s'}P(s'|s,a)(R(s',s,a)+\gamma V(s'))$
+
+### Policy Iteration
+-  $V_{\pi}(s) = \mathbb{E}(R(s',s,\pi(s))+\gamma V_{\pi}(s'))$
+
+-  $V_{\pi}(s) = \sum_{s'}P(s'|s,\pi(s))(R(s',s,\pi(s))+\gamma V_{\pi}(s'))$
+
+-  $\pi(s) = argmax_{a}\mathbb{E}(R(s',s,a)+\gamma V_{\pi}(s'))$
+
+-  Typically converges in fewer iterations compared Value Iteration
+
+## Model Free Reinforcement Learning
+
+### Quality Function
+-  $Q(s,a)$ =  Quality of state/action pair
+
+-  $Q(s,a) = \mathbb{E}(R(s',s,a)+\gamma V(s'))$
+
+-  $Q(s,a) = \sum_{s'}P(s'|s,a)(R(s',s,a)+\gamma V(s'))$
+
+-  $V(s) = max_{a}Q(s,a)$
+
+-  $\pi(s,a) = argmax_{a}Q(s,a)$
+
+### Monte Carlo
+-  $R_{\sum} = \sum_{k=1}^{n}\gamma^{k}r_{k}$ <--- Total Reward Over Episode
+
+-  $V^{new}(s_{k}) = V^{old}(s_{k}) + $ $ 1\over n$ $(R_{\sum}-V^{old}(s_{k}))$ $ \forall k \in[1, ..., n]$ 
+
+-  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + $ $ 1\over n$ $(R_{\sum}-Q^{old}(s_{k}, a_{k}))$ $ \forall k \in[1, ..., n]$
+
+### Temporal Difference Learning
+
+#### TD(0)
+-  $V(s_{k}) = \mathbb{E}(r_{k} + \gamma V(s_{k+1}))$
+
+-  $V^{new}(s_{k}) = V^{old}(s_{k}) + \alpha(r_{k} + \gamma V^{old}(s_{k+1}) - V^{old}(s_{k}))$
+
+#### TD(1)
+-  $V(s_{k}) = \mathbb{E}(r_{k} + \gamma r_{k+1} + \gamma^{2} V(s_{k+2}))$
+
+-  $V^{new}(s_{k}) = V^{old}(s_{k}) + \alpha(r_{k} + \gamma r_{k+1} + \gamma^{2}V^{old}(s_{k+2}) - V^{old}(s_{k}))$
+
+    -  $R_{\sum}^{(2)} = r_{k} + \gamma r_{k+1} + \gamma^{2}V^{old}(s_{k+2})$ 
+#### TD(N)
+-  $R_{\sum}^{(n)} = r_{k} + \gamma r_{k+1} + \gamma^{2}r_{k+2} + ... + \gamma^{n}r_{k+n} + \gamma^{n+1}V(s_{k+n+1})$
+
+-  $R_{\sum}^{(n)} = \sum_{j=0}^{n}\gamma^{j}r_{k+j}+\gamma^{n+1}V(s_{k+n+1})$
+#### TD-$\lambda$
+-  $R_{\sum}^{\lambda} = (1 - \lambda)\sum_{k=1}^{\infty}\lambda^{n-1}R_{\sum}^{(n)}$
+
+-  $V^{new}(s_{k}) = V^{old}(s_{k}) + \alpha(R_{\sum}^{\lambda} - V^{old}(s_{k}))$
+
+### QLearning
+-  Off Policy TD(0) Learning of the Quality Function Q
+
+-  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \alpha(r_{k} + \gamma max_{a}Q(s_{k+1}, a) - Q^{old}(s_{k}, a_{k}))$
+
+### SARSA: State-Action-Reward-State-Action
+-  On Policy TD Learning of the Quality Function Q
+
+    -  Can work with all TD variants
+
+-  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \alpha(r_{k} + \gamma Q^{old}(s_{k+1}, a_{k+1}) - Q^{old}(s_{k}, a_{k}))$
+
+## Deep Reinforcement Learning
+
+### Policy Gradient Optimization
+-  $R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}\pi_{\theta}(s, a)Q(s, a)$
+
+-  $\nabla_{\theta}R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}Q(s, a)\nabla_{\theta}\pi_{\theta}(s, a)$
+
+-  $\nabla_{\theta}R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}\pi_{\theta}(s, a)Q(s, a)$ $\nabla_{\theta}\pi_{\theta}(s, a)\over \pi_{\theta}(s, a)$
+
+-  $\nabla_{\theta}R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}\pi_{\theta}(s, a)Q(s, a)\nabla_{\theta}log(\pi_{\theta}(s, a))$
+
+-  $\nabla_{\theta}R_{\sum, \theta} = \mathbb{E}(Q(s, a)\nabla_{\theta}log(\pi_{\theta}(s,a)))$
+
+-  $\theta^{new} = \theta^{old} + \alpha \nabla_{\theta}R_{\sum, \theta}$
+
+### Deep QLearning
+-  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \alpha(r_{k} + \gamma max_{a}Q(s_{k+1}, a) - Q^{old}(s_{k}, a_{k}))$
+
+-  $Q(s, a) \approx Q(s, a, \theta)$ <--- Parametrize Q Function with Neural Network (NN)
+
+-  $L = \mathbb{E}[(r_{k} + \gamma max_{a}Q(s_{k+1}, a_{k+1}, \theta) - Q(s_{k}, a_{k}, \theta))^{2}]$ <--- Lost Function
+
+#### Advantage Network
+-  $Q(s, a, \theta) = V(s, \theta_{1}) + A(s, a, \theta_{2})$ <--- Deep Dueling Q Network (DDQN)
+
+### Actor-Critic Network 
+-  $\pi(s, a) = \approx \pi(s, a, \theta)$ <--- Actor: Policy Based
+
+-  $V(s_{k}) = \mathbb{E}(r_{k} + \gamma V(s_{k+1}))$ <--- Critic: Value Based
+
+-  $\theta_{k+1} = \theta_{k} + \alpha(r_{k} + \gamma V(s_{k+1}) - V(s_{k}))$ <--- Use TD signal from critic to update policy parameters
+
+#### Advantage Actor-Critic Network
+-  $\pi(s, a) = \approx \pi(s, a, \theta)$ <--- Actor: Deep Policy Network
+
+-  $Q(s_{k}, a_{k}, \theta_{2})$ <--- Critic: Deep Dueling Q Network
+
+-  $\theta_{k+1} = \theta_{k} + \alpha \nabla_{\theta}((log \pi(s_{k}, a_{k}, \theta))Q(s_{k}, a_{k}, \theta_{2}))$
+
+
+
