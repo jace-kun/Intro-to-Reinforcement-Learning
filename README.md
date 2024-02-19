@@ -144,9 +144,27 @@
 
                 -  The process of solving this optimization problem is called Policy Search. We want to find the best policy to drive actions and maximize cumulative rewards.
              
-# Overview of Reinforcement Learning Methods: Model Based and Model Free Algorithms
+# Overview of Reinforcement Learning Methods and Algorithms
 
--  https://youtube.com/playlist?list=PLh4QNkwqMcmajgr01eLZIptATKKvOLqAZ&si=_pevc4Vj_d_7MzjB
+1. Watch videos 1-4 in this playlist: https://youtube.com/playlist?list=PLh4QNkwqMcmajgr01eLZIptATKKvOLqAZ&si=_pevc4Vj_d_7MzjB
+
+2. SARSA algorithm for OpenAI Gym FrozenLake Environment
+    -  Run SARSA.ipynb
+    -  https://www.kaggle.com/code/viznrvn/rl-frozenlake-with-sarsa
+
+3. Qlearning algorithm for OpenAI Gym Cartpole Environment
+    -  Run Qlearning.ipynb
+    -  https://medium.com/swlh/using-q-learning-for-openais-cartpole-v1-4a216ef237df
+
+4. Watch videos 5-15 in the above playlist
+    -  Introduces Neural Networks, Deep Reinforcement Algorithms, and Pytorch
+
+5. Deep Qlearning algorithm for OpenAI Gym Cartpole Environment
+    -  Run Deep_Qlearning.ipynb
+    -  Video 16 in the above playlist
+    -  https://www.nature.com/articles/nature14236
+
+# Helpful Equations to Know
 
 ## Model Based Reinforcement Learning
 
