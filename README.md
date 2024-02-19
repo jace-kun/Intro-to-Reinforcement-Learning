@@ -144,3 +144,4 @@
 
                 -  The process of solving this optimization problem is called Policy Search. We want to find the best policy to drive actions and maximize cumulative rewards.
              
+## Watch videos 1-4 in this playlist: 
