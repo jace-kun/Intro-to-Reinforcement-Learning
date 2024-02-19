@@ -42,37 +42,31 @@
 -  Markov Property: Future is independent of the past, given the present.
 
     -  Everything that we needed to learn from the past is embedded in the present, and there is no reason for us to look backwards. We have the information in the present state, and this present state can be used to model the future. 
-<br>
-<br>
+
 -  At each time step...
 
     -  ...environment is in some state $S_{t}$
 
         -  If you try to imagine the state in the real world, let's say for a walking robot, a simplified representation of state will simply be the coordinates of the robot. The state can also contain information such as whether there's a hill up ahead, a hole to the left, etc.
-<br>
-<br>
+
     -  Decision maker can choose an action a
 
         -  The agent then observes the current state and then takes some action a within this state. What this action is depends on the policy theat the agent uses, and this policy has been predetermined when the agent explored the environment earlier.
-<br>
-<br>
+
     -  Moves environment to new state $S_{t+1}$
 
         -  The consequence of the agent taking this action a is that the state has now moved to a new state, $S_{t+1}$. This new state will have an entirely new set of oberservations and conditions.
-<br>
-<br>
+
     -  Decision maker receives reward $R_{a}$($S_{t}$, $S_{t+1}$)
 
         -  The decision maker then receives some reinforcement for this, some positive or negative reinforcemnt. Let's assume positive reinforcement for now. The decision maker recieves some reward for taking this action a when in state $S_{t}$.
 
         -  The reward depends only on the action that the decison maker took, the current state, and the next state. The reward is not of the form $R_{a}$($S_{t-2}$, $S_{t-1}$, $S_{t}$, $S_{t+1}$), which includes the previous state information. 
-<br>
-<br>
+
     -  $S_{t+1}$ depends only on a and $S_{t}$
     
         -  And this is the Markov property. The future state $S_{t+1}$ is completely independent of the past. $S_{t-1}$, $S_{t-2}$ are all irrevelant given that we know the present $S_{t}$. The path taken to get to the current state does not matter.
-<br>
-<br>
+
 -  We need to model the environment so that the agent is able to explore it, finding the best possible action at every step. The MDP greatly simplifies the exploration of the environment because it allows the use of dynamic programming techniques, which makes policy search tractable. Finding the best policy to use in order to make decisions in a comple environment is now computable.
 
 ### Policy Search
@@ -107,8 +101,7 @@
     -  Policy: Function P that takes in current state S, and returns action a
     
         -  a = P(S)
-<br>
-<br>
+  
     -  Policy P should maximize cumulative rewards
 
 -   Cumalitive Rewards:
@@ -140,8 +133,7 @@
         -  Maximize $R_{a}(S_{t}, S_{t+1}) + \gamma R_{a}(S_{t+1}, S_{t+2}) + \gamma^{2}R_{a}(S_{t+2}, S_{t+3}) + \gamma^{3}R_{a}(S_{t+3}, S_{t+4}) + \gamma^{4}R_{a}(S_{t+4}, S_{t+5}) + ...$
 
             -  The rewards you might expect in future time periods are more uncertain, which is why you discount it. The further in the future a reward is, the more you discount it.
-<br>
-<br>
+         
         -  Rewards depend on the action: a = P(S)
 
             -  Therefore, $R_{P(S)}(S_{t}, S_{t+1}) + \gamma R_{P(S)}(S_{t+1}, S_{t+2}) + \gamma^{2}R_{P(S)}(S_{t+2}, S_{t+3}) + \gamma^{3}R_{P(S)}(S_{t+3}, S_{t+4}) + \gamma^{4}R_{P(S)}(S_{t+4}, S_{t+5}) + ...$
