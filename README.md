@@ -40,15 +40,10 @@
 
 ### Modeling the Environment as a Markov Decision Process (MDP)
 -  Markov Property: Future is independent of the past, given the present.
-
     -  Everything that we needed to learn from the past is embedded in the present, and there is no reason for us to look backwards. We have the information in the present state, and this present state can be used to model the future. 
-
 -  At each time step...
-
     -  ...environment is in some state $S_{t}$
-
         -  If you try to imagine the state in the real world, let's say for a walking robot, a simplified representation of state will simply be the coordinates of the robot. The state can also contain information such as whether there's a hill up ahead, a hole to the left, etc.
-
     -  Decision maker can choose an action a
 
         -  The agent then observes the current state and then takes some action a within this state. What this action is depends on the policy theat the agent uses, and this policy has been predetermined when the agent explored the environment earlier.
@@ -147,19 +142,20 @@
 # Overview of Reinforcement Learning Methods and Algorithms
 
 1. Watch videos 1-4 in this playlist: https://youtube.com/playlist?list=PLh4QNkwqMcmajgr01eLZIptATKKvOLqAZ&si=_pevc4Vj_d_7MzjB
+    -  Introduces Reinforcement Learning Methods and Algorithms
 
-2. SARSA algorithm for OpenAI Gym FrozenLake Environment
+3. SARSA algorithm for OpenAI Gym FrozenLake Environment
     -  Run SARSA.ipynb
     -  https://www.kaggle.com/code/viznrvn/rl-frozenlake-with-sarsa
 
-3. Qlearning algorithm for OpenAI Gym Cartpole Environment
+4. Qlearning algorithm for OpenAI Gym Cartpole Environment
     -  Run Qlearning.ipynb
     -  https://medium.com/swlh/using-q-learning-for-openais-cartpole-v1-4a216ef237df
 
-4. Watch videos 5-15 in the above playlist
-    -  Introduces Neural Networks, Deep Reinforcement Algorithms, and Pytorch
+5. Watch videos 5-15 in the above playlist
+    -  Introduces Neural Networks, Deep Reinforcement Learning Algorithms, and Pytorch
 
-5. Deep Qlearning algorithm for OpenAI Gym Cartpole Environment
+6. Deep Qlearning algorithm for OpenAI Gym Cartpole Environment
     -  Run Deep_Qlearning.ipynb
     -  Video 16 in the above playlist
     -  https://www.nature.com/articles/nature14236
