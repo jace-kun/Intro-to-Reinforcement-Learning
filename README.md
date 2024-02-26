@@ -209,7 +209,7 @@
 ### Monte Carlo
 -  $R_{\sum} = \sum_{k=1}^{n}\gamma^{k}r_{k}$ <--- Total Reward Over Episode
 
--  $V^{new}(s_{k}) = V^{old}(s_{k}) + $ 1\over n$ (R_{\sum}-V^{old}(s_{k})) \forall k \in[1, ..., n]$ 
+-  $V^{new}(s_{k}) = V^{old}(s_{k}) + 1\overn (R_{\sum}-V^{old}(s_{k})) \forall k \in[1, ..., n]$ 
 
 -  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + $ $ 1\over n$ $(R_{\sum}-Q^{old}(s_{k}, a_{k}))$ $ \forall k \in[1, ..., n]$
 
