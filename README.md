@@ -211,7 +211,7 @@
 
 -  $V^{new}(s_{k}) = V^{old}(s_{k}) + \frac{1}{n} (R_{\sum}-V^{old}(s_{k})) \forall k \in[1, ..., n]$ 
 
--  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + $ $ 1\over n$ $(R_{\sum}-Q^{old}(s_{k}, a_{k}))$ $ \forall k \in[1, ..., n]$
+-  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \frac{1}{n} (R_{\sum}-Q^{old}(s_{k}, a_{k})) \forall k \in[1, ..., n]$
 
 ### Temporal Difference Learning
 
