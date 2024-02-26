@@ -3,17 +3,20 @@
 ## Supervised Learning vs Unsupervised Learning vs Reinforcement Learning
 
 ### Supervised Learning
+
 -  In supervised learning, labels are associated with the training data, and these labels are used to correct the model parameters. These labels give the model an idea of what is correct, and it tries to fix itself so that its predictions are more correct.
 -  Supervised learning focuses on the attributes of each individual data point. These attributes are called features. Each data point is a list, or a vector, of such features, and this is called a feature vector. The input into the model is a feature vector, and the output is some kind of prediction, a classification or a regression. These feature vectors are typically called x variables. The outuput of the algorithm is a label. This a prediction your machine learning algorithm tries to make. 
 -  There are two broad categories of labels in supervised learning. Categorical values are typically the output of any classification problem. Categorical values are discrete outputs, meaning they fall into a certain categories such as days of the weeks, months of the year, true or false, cat or dog, etc. The model can also predict values in a continuous range between some start and end value. This is the output of a regression model. For example, the price of a house in San Francisco, the price of Google stock next week, etc. These output values of the model are called the y varaibles.
 -  Supervised learning makes the assumption that the input x, that is the feature vector or x variable, is linked to the output y by some function f, and the objective of the model is to learn what f is. This function f, which links the input to the output, is typically called mapping function.
 
 ### Unsupervised Learning
+
 -  The unsupervised learning technique only have the underlying data to work with. There are no corresponding y variables or labels on this data. This technique involves setting up the model correctly so that it has the ability to learn structure or patterns in the underlying data. These algorithms are set up in such a manner such that they're able to self-discover the patterns and structure in the data without the help of any labeled instances.
 -  One of the most common unsupervised learning algorithms is clustering. Clustering is used to find logical groups in the uderlying data. For example, when you cluster user data, you might want to find all users who like the same music in the same cluster. This will allow you to target specific ads to those users. There are many popular clustering algorithms out there. For example, K-means, mean shift clustering, hierarchical clustering, etc.
 - Another common unsupervised learning technique is autoencoding for dimensionality reduction. Typically, when working with data sets, there is a huge nuber of features. But not all of these features might be significant, and some of these features might be correlated with each other. This is where dimensionality reduction can be used in order to find the latent factrs that drive the data. Principal component analysis, or PCA,  is a classic technique that is used for dimensionality reduction.
 
 ### Reinforcement Learning (RL)
+
 -  Reinforcment learning is all about asking a number of different questions, that is exploring, and then figuring out which of the answers are correct, and then training an algorithm to make decisions based on these right answers.   
 -  Neither supervised nor unsupervised learning will work in an unknown environment, where x is unknown and when that type of data has never been encountered before by that machine learning model. This unknown environment is where reinforcement learning operates. 
 -  Reinforcement learning trains decision makers to take actions to maximize rewards in an uncertain environment. 
@@ -27,6 +30,7 @@
 ## Understanding the Reinforcement Learning Problem
 
 ### Modeling the Environment as a Markov Decision Process (MDP)
+
 -  Markov Property: Future is independent of the past, given the present.
     -  Everything that we needed to learn from the past is embedded in the present, and there is no reason for us to look backwards. We have the information in the present state, and this present state can be used to model the future. 
 -  At each time step...
@@ -44,6 +48,7 @@
 -  We need to model the environment so that the agent is able to explore it, finding the best possible action at every step. The MDP greatly simplifies the exploration of the environment because it allows the use of dynamic programming techniques, which makes policy search tractable. Finding the best policy to use in order to make decisions in a comple environment is now computable.
 
 ### Policy Search
+
 -  Once you model environment, the next step is to perform a policy search algorithm to find the best policy for your agent to make decisions in this environment. 
 -  Basic Elements of Reinforcement Learning (Recap):  
     -  Reward: Favorable result awarded for good actions. (The corollary is the negative awards, or the punishments, for bad actions.)
@@ -104,121 +109,105 @@
 ## Model Based Reinforcement Learning
 
 ### Value Function
+
 -  $V_{\pi}(s) = \mathbb{E}(\sum_{k}\gamma^{k}r_{k}|s_{0}=s)$
-
 -  $V(s) = max_{\pi} \mathbb{E}(\sum_{k=0}^{\infty}\gamma^{k}r_{k}|s_{0}=s)$
-
 -  $V(s) = max_{\pi} \mathbb{E}(r_{0}+\sum_{k=1}^{\infty}\gamma^{k}r_{k}|s_{1}=s')$
-
 -  $V(s) = max_{\pi} \mathbb{E}(r_{0}+\gamma V(s'))$ <--- Bellman's Equation
-
 - $\pi = argmax_{\pi} \mathbb{E}(r_{0} + \gamma V(s'))$
 
 ### Value Iteration
--  $V(s) = max_{a}\sum_{s'}P(s'|s,a)(R(s',s,a)+\gamma V(s'))$
 
+-  $V(s) = max_{a}\sum_{s'}P(s'|s,a)(R(s',s,a)+\gamma V(s'))$
 -  $\pi(s,a) = argmax_{a}\sum_{s'}P(s'|s,a)(R(s',s,a)+\gamma V(s'))$
 
 ### Policy Iteration
+
 -  $V_{\pi}(s) = \mathbb{E}(R(s',s,\pi(s))+\gamma V_{\pi}(s'))$
-
 -  $V_{\pi}(s) = \sum_{s'}P(s'|s,\pi(s))(R(s',s,\pi(s))+\gamma V_{\pi}(s'))$
-
 -  $\pi(s) = argmax_{a}\mathbb{E}(R(s',s,a)+\gamma V_{\pi}(s'))$
-
 -  Typically converges in fewer iterations compared Value Iteration
 
 ## Model Free Reinforcement Learning
 
 ### Quality Function
+
 -  $Q(s,a)$ =  Quality of state/action pair
-
 -  $Q(s,a) = \mathbb{E}(R(s',s,a)+\gamma V(s'))$
-
 -  $Q(s,a) = \sum_{s'}P(s'|s,a)(R(s',s,a)+\gamma V(s'))$
-
 -  $V(s) = max_{a}Q(s,a)$
-
 -  $\pi(s,a) = argmax_{a}Q(s,a)$
 
 ### Monte Carlo
+
 -  $R_{\sum} = \sum_{k=1}^{n}\gamma^{k}r_{k}$ <--- Total Reward Over Episode
-
 -  $V^{new}(s_{k}) = V^{old}(s_{k}) + \frac{1}{n} (R_{\sum}-V^{old}(s_{k})) \forall k \in[1, ..., n]$ 
-
 -  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \frac{1}{n} (R_{\sum}-Q^{old}(s_{k}, a_{k})) \forall k \in[1, ..., n]$
 
 ### Temporal Difference Learning
 
 #### TD(0)
--  $V(s_{k}) = \mathbb{E}(r_{k} + \gamma V(s_{k+1}))$
 
+-  $V(s_{k}) = \mathbb{E}(r_{k} + \gamma V(s_{k+1}))$
 -  $V^{new}(s_{k}) = V^{old}(s_{k}) + \alpha(r_{k} + \gamma V^{old}(s_{k+1}) - V^{old}(s_{k}))$
 
 #### TD(1)
+
 -  $V(s_{k}) = \mathbb{E}(r_{k} + \gamma r_{k+1} + \gamma^{2} V(s_{k+2}))$
-
 -  $V^{new}(s_{k}) = V^{old}(s_{k}) + \alpha(r_{k} + \gamma r_{k+1} + \gamma^{2}V^{old}(s_{k+2}) - V^{old}(s_{k}))$
-
     -  $R_{\sum}^{(2)} = r_{k} + \gamma r_{k+1} + \gamma^{2}V^{old}(s_{k+2})$ 
 #### TD(N)
+
 -  $R_{\sum}^{(n)} = r_{k} + \gamma r_{k+1} + \gamma^{2}r_{k+2} + ... + \gamma^{n}r_{k+n} + \gamma^{n+1}V(s_{k+n+1})$
-
 -  $R_{\sum}^{(n)} = \sum_{j=0}^{n}\gamma^{j}r_{k+j}+\gamma^{n+1}V(s_{k+n+1})$
-#### TD-$\lambda$
--  $R_{\sum}^{\lambda} = (1 - \lambda)\sum_{k=1}^{\infty}\lambda^{n-1}R_{\sum}^{(n)}$
 
+#### TD-$\lambda$
+
+-  $R_{\sum}^{\lambda} = (1 - \lambda)\sum_{k=1}^{\infty}\lambda^{n-1}R_{\sum}^{(n)}$
 -  $V^{new}(s_{k}) = V^{old}(s_{k}) + \alpha(R_{\sum}^{\lambda} - V^{old}(s_{k}))$
 
 ### QLearning
--  Off Policy TD(0) Learning of the Quality Function Q
 
+-  Off Policy TD(0) Learning of the Quality Function Q
 -  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \alpha(r_{k} + \gamma max_{a}Q(s_{k+1}, a) - Q^{old}(s_{k}, a_{k}))$
 
 ### SARSA: State-Action-Reward-State-Action
+
 -  On Policy TD Learning of the Quality Function Q
-
     -  Can work with all TD variants
-
 -  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \alpha(r_{k} + \gamma Q^{old}(s_{k+1}, a_{k+1}) - Q^{old}(s_{k}, a_{k}))$
 
 ## Deep Reinforcement Learning
 
 ### Policy Gradient Optimization
+
 -  $R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}\pi_{\theta}(s, a)Q(s, a)$
-
 -  $\nabla_{\theta}R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}Q(s, a)\nabla_{\theta}\pi_{\theta}(s, a)$
-
 -  $\nabla_{\theta}R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}\pi_{\theta}(s, a)Q(s, a)$ $\nabla_{\theta}\pi_{\theta}(s, a)\over \pi_{\theta}(s, a)$
-
 -  $\nabla_{\theta}R_{\sum, \theta} = \sum_{s \in S}\mu_{\theta}(s) \sum_{a \in A}\pi_{\theta}(s, a)Q(s, a)\nabla_{\theta}log(\pi_{\theta}(s, a))$
-
 -  $\nabla_{\theta}R_{\sum, \theta} = \mathbb{E}(Q(s, a)\nabla_{\theta}log(\pi_{\theta}(s,a)))$
-
 -  $\theta^{new} = \theta^{old} + \alpha \nabla_{\theta}R_{\sum, \theta}$
 
 ### Deep QLearning
+
 -  $Q^{new}(s_{k}, a_{k}) = Q^{old}(s_{k}, a_{k}) + \alpha(r_{k} + \gamma max_{a}Q(s_{k+1}, a) - Q^{old}(s_{k}, a_{k}))$
-
 -  $Q(s, a) \approx Q(s, a, \theta)$ <--- Parametrize Q Function with Neural Network (NN)
-
 -  $L = \mathbb{E}[(r_{k} + \gamma max_{a}Q(s_{k+1}, a_{k+1}, \theta) - Q(s_{k}, a_{k}, \theta))^{2}]$ <--- Lost Function
 
 #### Advantage Network
+
 -  $Q(s, a, \theta) = V(s, \theta_{1}) + A(s, a, \theta_{2})$ <--- Deep Dueling Q Network (DDQN)
 
 ### Actor-Critic Network 
+
 -  $\pi(s, a) = \approx \pi(s, a, \theta)$ <--- Actor: Policy Based
-
 -  $V(s_{k}) = \mathbb{E}(r_{k} + \gamma V(s_{k+1}))$ <--- Critic: Value Based
-
 -  $\theta_{k+1} = \theta_{k} + \alpha(r_{k} + \gamma V(s_{k+1}) - V(s_{k}))$ <--- Use TD signal from critic to update policy parameters
 
 #### Advantage Actor-Critic Network
+
 -  $\pi(s, a) = \approx \pi(s, a, \theta)$ <--- Actor: Deep Policy Network
-
 -  $Q(s_{k}, a_{k}, \theta_{2})$ <--- Critic: Deep Dueling Q Network
-
 -  $\theta_{k+1} = \theta_{k} + \alpha \nabla_{\theta}((log \pi(s_{k}, a_{k}, \theta))Q(s_{k}, a_{k}, \theta_{2}))$
 
 
